@@ -1,16 +1,18 @@
 import React from 'react';
-import { Sparkles, Download, Wand2, ShieldCheck, Zap, Layers } from 'lucide-react';
+import { Sparkles, Download, Wand2, ShieldCheck, Zap, Layers, Smile } from 'lucide-react';
 
 interface HeroProps {
   onQuickDownload: () => void;
   onExploreAi: () => void;
   onOpenEditor: () => void;
+  onOpenFaceSwap: () => void;
 }
 
 export const Hero: React.FC<HeroProps> = ({
   onQuickDownload,
   onExploreAi,
   onOpenEditor,
+  onOpenFaceSwap,
 }) => {
   return (
     <div className="relative pt-6 pb-12 sm:pt-10 sm:pb-16 overflow-hidden">
@@ -22,7 +24,7 @@ export const Hero: React.FC<HeroProps> = ({
         {/* Top Feature Pill */}
         <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-white/[0.04] border border-white/10 text-xs sm:text-sm text-indigo-300 mb-6 backdrop-blur-md shadow-inner">
           <Sparkles className="w-4 h-4 text-pink-400" />
-          <span className="font-medium">All-in-One Thumbnail Toolkit &middot; No Account Required</span>
+          <span className="font-medium">All-in-One Thumbnail Toolkit &middot; Face Swap &middot; AI Generator &middot; File Upload</span>
         </div>
 
         {/* Master Headline */}
@@ -35,7 +37,7 @@ export const Hero: React.FC<HeroProps> = ({
 
         {/* Subtitle */}
         <p className="text-base sm:text-lg md:text-xl text-slate-300 max-w-2xl mx-auto leading-relaxed mb-8">
-          Download existing YouTube thumbnails, explore resolutions, and design eye-catching alternatives with AI.
+          Download existing YouTube thumbnails, upload your own images, swap reaction faces, and design eye-catching alternatives with AI.
         </p>
 
         {/* CTA Buttons */}
@@ -46,6 +48,14 @@ export const Hero: React.FC<HeroProps> = ({
           >
             <Download className="w-5 h-5" />
             <span>Download Thumbnail</span>
+          </button>
+
+          <button
+            onClick={onOpenFaceSwap}
+            className="flex items-center justify-center gap-2.5 px-6 py-3.5 rounded-xl font-bold text-sm sm:text-base text-white bg-gradient-to-r from-pink-600 to-purple-600 hover:from-pink-500 hover:to-purple-500 shadow-lg shadow-pink-600/30 hover:shadow-pink-600/50 hover:scale-[1.02] active:scale-[0.98] transition-all"
+          >
+            <Smile className="w-5 h-5" />
+            <span>Face Swap</span>
           </button>
 
           <button
@@ -61,7 +71,7 @@ export const Hero: React.FC<HeroProps> = ({
             className="flex items-center justify-center gap-2 px-5 py-3.5 rounded-xl font-semibold text-sm sm:text-base text-slate-300 hover:text-white bg-transparent hover:bg-white/[0.04] transition-all"
           >
             <Layers className="w-4 h-4 text-indigo-400" />
-            <span>Open Studio Editor</span>
+            <span>Studio Editor</span>
           </button>
         </div>
 

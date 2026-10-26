@@ -8,13 +8,16 @@ import {
   Menu, 
   X, 
   Github, 
-  Settings2 
+  Settings2,
+  Smile 
 } from 'lucide-react';
 import { ProviderConfig } from '../services/imageGeneration';
 
+export type NavTab = 'downloader' | 'generator' | 'editor' | 'faceswap' | 'about';
+
 interface NavbarProps {
-  activeTab: 'downloader' | 'generator' | 'editor' | 'about';
-  setActiveTab: (tab: 'downloader' | 'generator' | 'editor' | 'about') => void;
+  activeTab: NavTab;
+  setActiveTab: (tab: NavTab) => void;
   providerConfig: ProviderConfig;
   onOpenSettings: () => void;
 }
@@ -29,12 +32,13 @@ export const Navbar: React.FC<NavbarProps> = ({
 
   const navItems = [
     { id: 'downloader', label: 'Downloader', icon: Download },
+    { id: 'faceswap', label: 'Face Swap', icon: Smile },
     { id: 'generator', label: 'AI Generator', icon: Wand2 },
     { id: 'editor', label: 'Studio Editor', icon: SlidersHorizontal },
     { id: 'about', label: 'About & Help', icon: HelpCircle },
   ] as const;
 
-  const handleNavClick = (tabId: 'downloader' | 'generator' | 'editor' | 'about') => {
+  const handleNavClick = (tabId: NavTab) => {
     setActiveTab(tabId);
     setMobileMenuOpen(false);
   };

@@ -14,7 +14,8 @@ import {
   X, 
   AlertTriangle,
   SlidersHorizontal,
-  Youtube
+  Youtube,
+  Smile
 } from 'lucide-react';
 import { showToast } from './Toast';
 
@@ -25,6 +26,7 @@ interface ThumbnailPreviewProps {
   availability: Record<ResolutionKey, ThumbnailCheckResult | null>;
   onSendToEditor: (imageUrl: string) => void;
   onSendToAi: () => void;
+  onSendToFaceSwap?: (imageUrl: string) => void;
 }
 
 export const ThumbnailPreview: React.FC<ThumbnailPreviewProps> = ({
@@ -34,6 +36,7 @@ export const ThumbnailPreview: React.FC<ThumbnailPreviewProps> = ({
   availability,
   onSendToEditor,
   onSendToAi,
+  onSendToFaceSwap,
 }) => {
   const [copiedId, setCopiedId] = useState(false);
   const [copiedUrl, setCopiedUrl] = useState(false);
@@ -187,6 +190,18 @@ export const ThumbnailPreview: React.FC<ThumbnailPreviewProps> = ({
             >
               <SlidersHorizontal className="w-4 h-4 text-indigo-400" />
               <span>Edit in Studio</span>
+            </button>
+          )}
+
+          {/* Send to Face Swap */}
+          {isAvailable && onSendToFaceSwap && (
+            <button
+              onClick={() => onSendToFaceSwap(selectedOption.url)}
+              className="flex items-center justify-center gap-2 px-4 py-3.5 rounded-xl font-bold text-sm text-pink-300 hover:text-pink-200 bg-pink-500/10 hover:bg-pink-500/20 border border-pink-500/30 transition-all active:scale-95 w-full sm:w-auto"
+              title="Put your face or reaction onto this thumbnail"
+            >
+              <Smile className="w-4 h-4 text-pink-400" />
+              <span>Face Swap</span>
             </button>
           )}
         </div>

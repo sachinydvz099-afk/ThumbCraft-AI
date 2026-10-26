@@ -8,7 +8,8 @@ import {
   Settings2, 
   AlertCircle, 
   Check, 
-  Info
+  Info,
+  Smile
 } from 'lucide-react';
 import { 
   GenerationSettings, 
@@ -26,6 +27,7 @@ interface AiGeneratorProps {
   providerConfig: ProviderConfig;
   onOpenSettings: () => void;
   onSendToEditor: (imageUrl: string) => void;
+  onSendToFaceSwap?: (imageUrl: string) => void;
   initialTitle?: string;
 }
 
@@ -61,6 +63,7 @@ export const AiGenerator: React.FC<AiGeneratorProps> = ({
   providerConfig,
   onOpenSettings,
   onSendToEditor,
+  onSendToFaceSwap,
   initialTitle = '',
 }) => {
   const [prompt, setPrompt] = useState('');
@@ -438,7 +441,7 @@ export const AiGenerator: React.FC<AiGeneratorProps> = ({
                   <span>Download Generated Thumbnail</span>
                 </button>
 
-                <div className="grid grid-cols-2 gap-2">
+                <div className="grid grid-cols-1 sm:grid-cols-3 gap-2">
                   <button
                     onClick={() => handleGenerate()}
                     disabled={isGenerating}
@@ -453,8 +456,19 @@ export const AiGenerator: React.FC<AiGeneratorProps> = ({
                     className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold text-purple-300 bg-purple-500/15 hover:bg-purple-500/25 border border-purple-500/30 transition-all"
                   >
                     <SlidersHorizontal className="w-3.5 h-3.5" />
-                    <span>Open in Studio</span>
+                    <span>In Studio</span>
                   </button>
+
+                  {onSendToFaceSwap && (
+                    <button
+                      onClick={() => onSendToFaceSwap(result.imageUrl)}
+                      className="flex items-center justify-center gap-1.5 py-2.5 rounded-xl text-xs font-semibold text-pink-300 bg-pink-500/15 hover:bg-pink-500/25 border border-pink-500/30 transition-all"
+                      title="Put your face onto this AI thumbnail"
+                    >
+                      <Smile className="w-3.5 h-3.5" />
+                      <span>Face Swap</span>
+                    </button>
+                  )}
                 </div>
               </>
             ) : (

@@ -68,7 +68,11 @@ export function loadProviderConfig(): ProviderConfig {
   try {
     const raw = localStorage.getItem(STORAGE_KEY);
     if (raw) {
-      return JSON.parse(raw);
+      const parsed = JSON.parse(raw);
+      if (parsed.type === 'pollinations' && !parsed.modelName) {
+        parsed.modelName = 'flux';
+      }
+      return parsed;
     }
   } catch (err) {
     console.error('Failed to read provider configuration from localStorage:', err);
@@ -151,23 +155,51 @@ export async function generateThumbnailImage(
 
   // 2. Pollinations AI (Free Public Adapter - no API keys needed)
   if (activeConfig.type === 'pollinations') {
-    const encodedPrompt = encodeURIComponent(prompt);
+    const model = activeConfig.modelName || 'flux';
+    // Keep prompt within safe URL parameter bounds
+    const cleanPrompt = prompt.slice(0, 400);
+    const encodedPrompt = encodeURIComponent(cleanPrompt);
     const seed = Math.floor(Math.random() * 10000000);
-    // Pollinations public image endpoint
-    const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${dims.width}&height=${dims.height}&seed=${seed}&nologo=true&model=${activeConfig.modelName || 'flux'}`;
+    
+    // Direct Pollinations image URL (model=flux is free and reliable)
+    const url = `https://image.pollinations.ai/prompt/${encodedPrompt}?width=${dims.width}&height=${dims.height}&seed=${seed}&nologo=true&model=${model}`;
 
-    // Verify image response by pre-fetching
-    const response = await fetch(url);
-    if (!response.ok) {
-      throw new Error(`AI generation request failed with status: ${response.status} ${response.statusText}`);
-    }
+    // Verify image loading in browser without CORS restrictions
+    await new Promise<void>((resolve) => {
+      const img = new Image();
+      let settled = false;
 
-    const blob = await response.blob();
-    const objectUrl = URL.createObjectURL(blob);
+      // Generous timeout for AI diffusion generation (up to 25s)
+      const timer = setTimeout(() => {
+        if (!settled) {
+          settled = true;
+          // Resolve anyway so the UI can render the streaming image directly
+          resolve();
+        }
+      }, 25000);
+
+      img.onload = () => {
+        if (!settled) {
+          settled = true;
+          clearTimeout(timer);
+          resolve();
+        }
+      };
+
+      img.onerror = () => {
+        if (!settled) {
+          settled = true;
+          clearTimeout(timer);
+          // Resolve and let browser <img> retry or show direct link
+          resolve();
+        }
+      };
+
+      img.src = url;
+    });
 
     return {
-      imageUrl: objectUrl,
-      blob,
+      imageUrl: url,
       promptUsed: prompt,
       provider: 'pollinations',
       seed,

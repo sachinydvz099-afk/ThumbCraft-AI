@@ -114,7 +114,7 @@ export const Navbar: React.FC<NavbarProps> = ({
 
             {/* GitHub Link */}
             <a
-              href="https://github.com"
+              href="https://github.com/sachinydvz099-afk/ThumbCraft-AI"
               target="_blank"
               rel="noopener noreferrer"
               className="p-2 rounded-lg text-slate-400 hover:text-white hover:bg-white/5 border border-transparent hover:border-white/10 transition-colors"

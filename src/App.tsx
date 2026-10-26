@@ -218,7 +218,7 @@ export function App() {
               AI Settings
             </button>
             <a
-              href="https://github.com"
+              href="https://github.com/sachinydvz099-afk/ThumbCraft-AI"
               target="_blank"
               rel="noopener noreferrer"
               className="hover:text-white inline-flex items-center gap-1 transition-colors"

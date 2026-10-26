@@ -74,8 +74,8 @@ Designed to be hosted with **100% static hosting on GitHub Pages** without requi
 
 1. **Clone the repository**:
    ```powershell
-   git clone https://github.com/YOUR_USERNAME/thumbcraft-ai.git
-   cd thumbcraft-ai
+   git clone https://github.com/sachinydvz099-afk/ThumbCraft-AI.git
+   cd ThumbCraft-AI
    ```
 
 2. **Install dependencies**:
@@ -125,8 +125,7 @@ git commit -m "feat: initial release of ThumbCraft AI"
 git branch -M main
 
 # 4. Link your remote GitHub repository
-# Replace YOUR_USERNAME and REPO_NAME with your GitHub details
-git remote add origin https://github.com/YOUR_USERNAME/thumbcraft-ai.git
+git remote add origin https://github.com/sachinydvz099-afk/ThumbCraft-AI.git
 
 # 5. Push code to GitHub
 git push -u origin main
@@ -134,13 +133,14 @@ git push -u origin main
 
 ### Step 2: Enable GitHub Pages in Repository Settings
 
-1. Go to your repository on **GitHub.com**.
+1. Go to your repository on **GitHub.com**:
+   👉 `https://github.com/sachinydvz099-afk/ThumbCraft-AI`
 2. Click on **Settings** > **Pages** (under "Code and automation" in the left sidebar).
 3. Under **Build and deployment** > **Source**, select:
    👉 **GitHub Actions**
 4. Trigger the workflow by pushing to `main` or going to the **Actions** tab and selecting **Deploy ThumbCraft AI to GitHub Pages** > **Run workflow**.
 5. Once complete, your site will be live at:
-   `https://YOUR_USERNAME.github.io/thumbcraft-ai/`
+   👉 **`https://sachinydvz099-afk.github.io/ThumbCraft-AI/`**
 
 ---
 

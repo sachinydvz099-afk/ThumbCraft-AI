@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <title>ThumbCraft AI - Redirecting</title>
+    <script>
+      // Single Page App redirect for GitHub Pages
+      // If a route is loaded directly on GitHub Pages, redirect to root with path in query
+      const pathSegments = window.location.pathname.split('/').filter(Boolean);
+      // If deployed in a subdirectory like /repo-name/
+      const repoName = pathSegments.length > 0 ? '/' + pathSegments[0] : '';
+      window.location.replace(window.location.origin + repoName + '/');
+    </script>
+  </head>
+  <body style="background:#0a0d14; color:#94a3b8; font-family:sans-serif; text-align:center; padding-top:20vh;">
+    <h2>Redirecting to ThumbCraft AI...</h2>
+  </body>
+</html>
